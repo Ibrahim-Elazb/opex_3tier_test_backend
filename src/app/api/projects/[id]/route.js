@@ -61,7 +61,7 @@ export async function PATCH(request, { params }) {
             }, { status: 400 });
         }
         console.log("------------- error message ----------------")
-        console.error(e.message);
+        console.log(e.message);
         console.log("--------------------------------------------")
         return Response.json({
             status: 500,

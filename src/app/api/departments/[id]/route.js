@@ -55,7 +55,7 @@ export async function DELETE(request, { params }) {
         }
 
         console.log("------------- error message ----------------")
-        console.error(e.message);
+        console.log(e.message);
         console.log("--------------------------------------------")
         return Response.json({
             status: 500,
