@@ -257,8 +257,8 @@ const EmployeeForm = ({ allDepartments, employee }) => {
             value={departmentId}
             onChange={(event) => setDepartmentId(+event.target.value)}
           >
-            {allDepartments.map((department) => (
-              <option value={department.department_id}>
+            {allDepartments.map((department,index) => (
+              <option key={index} value={department.department_id}>
                 {department.department_name}
               </option>
             ))}

@@ -5,7 +5,7 @@ function NotFoundPage() {
     <div className="text-center my-10">
       <h1 className="text-6xl font-bold text-gray-800">404 Not Found</h1>
       <p className="text-gray-600 mt-4">
-        The page you're looking for doesn't exist.
+        The page you&apos;re looking for doesn&apos;t exist.
       </p>
       <a
         href="/"
