@@ -1,0 +1,51 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mysql-initdb
+  namespace: opex-app
+data:
+  init.sql: |
+    USE `db`;
+    
+    DROP TABLE IF EXISTS `departments`;
+    CREATE TABLE `departments` (
+      `department_id` int NOT NULL AUTO_INCREMENT,
+      `department_name` varchar(255) NOT NULL,
+      PRIMARY KEY (`department_id`)
+    ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ;
+    
+    INSERT INTO `departments` VALUES (1,'coding team'),(4,'Maintenance'),(5,'New financial'),(7,'HR');
+    
+    DROP TABLE IF EXISTS `employees`;
+    CREATE TABLE `employees` (
+      `employee_id` int NOT NULL AUTO_INCREMENT,
+      `first_name` varchar(255) NOT NULL,
+      `last_name` varchar(255) NOT NULL,
+      `email` varchar(255) NOT NULL,
+      `phone_number` varchar(255) DEFAULT NULL,
+      `hire_date` date NOT NULL,
+      `job` varchar(255) NOT NULL,
+      `salary` int DEFAULT NULL,
+      `department_id` int DEFAULT NULL,
+      PRIMARY KEY (`employee_id`),
+      UNIQUE KEY `email` (`email`(191)), 
+      KEY `fk_department_employees` (`department_id`),
+      CONSTRAINT `fk_department_employees` FOREIGN KEY (`department_id`) REFERENCES `departments` (`department_id`)
+    ) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ;
+    
+    INSERT INTO `employees` VALUES (4,'Ibrahim','Elazb','Ibrahim@gmail.com','01005205330','2024-02-10','Engineer',1000,1),(6,'Ibrahim','Elazb','ibrahim.m.elazb@gmail.com','01005205330','2024-02-24','Software Engineer',1000,4),(9,'mohamed','ibrahim','mohamed_ibrahim@gmail.com','01005205330','2024-02-16','team leader',3654,5);
+    
+    DROP TABLE IF EXISTS `projects`;
+    CREATE TABLE `projects` (
+      `project_id` int NOT NULL AUTO_INCREMENT,
+      `project_name` varchar(255) NOT NULL,
+      `start_date` date DEFAULT NULL,
+      `end_date` date DEFAULT NULL,
+      `budget` int DEFAULT NULL,
+      `department_id` int DEFAULT NULL,
+      PRIMARY KEY (`project_id`),
+      KEY `fk_department_projects` (`department_id`),
+      CONSTRAINT `fk_department_projects` FOREIGN KEY (`department_id`) REFERENCES `departments` (`department_id`)
+    ) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ;
+    
+    INSERT INTO `projects` VALUES (8,'AMHS Upgrade','2023-10-20','2050-10-20',10,1),(10,'VCCS  Project','2024-01-31','2024-06-06',1200,5);
